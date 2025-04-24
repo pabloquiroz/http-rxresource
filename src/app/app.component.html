@@ -1,3 +1,34 @@
-<h1 class="text-3xl font-bold">
-  Hello world!
-</h1>
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Magic Cards</h1>
+
+  @if(cards.isLoading()) {
+    <div class="text-blue-500">Loading cards...</div>
+  }
+
+  @if(cards.error()) {
+    <div class="text-red-500">Failed to load cards</div>
+  }
+
+  @if(cards.hasValue()) {
+    <table class="min-w-full table-auto border-collapse border border-gray-200">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border px-4 py-2 text-left">id</th>
+          <th class="border px-4 py-2 text-left">Name</th>
+          <th class="border px-4 py-2 text-left">Type</th>
+          <th class="border px-4 py-2 text-left">Set</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (card of cards.value().cards.slice(0, 10); track card.id) {
+          <tr>
+            <td class="border px-4 py-2">{{ card.id }}</td>
+            <td class="border px-4 py-2">{{ card.name }}</td>
+            <td class="border px-4 py-2">{{ card.type }}</td>
+            <td class="border px-4 py-2">{{ card.setName }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
